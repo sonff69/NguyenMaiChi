@@ -1,51 +1,1027 @@
-# Sample workflow for building and deploying a Jekyll site to GitHub Pages
-name: Deploy Jekyll with GitHub Pages dependencies preinstalled
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nguyễn Mai Chi - Nhật Ký Học Tập Số</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts hỗ trợ tiếng Việt mượt mà -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        dreamPurple: '#8e94f2',
+                        dreamPink: '#dab6fc',
+                        dreamBlue: '#b3c5ff',
+                        dreamDark: '#0b0813',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Thiết lập background kết hợp với back.jpg và lớp phủ mộng mơ */
+        body {
+            background: linear-gradient(rgba(11, 8, 19, 0.85), rgba(18, 14, 30, 0.95)), url('back.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #f3f4f6;
+        }
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+        /* Hiệu ứng kính mờ (Glassmorphism) */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+        .glass-card {
+            background: rgba(255, 255, 255, 0.015);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+        .glass-card:hover {
+            transform: translateY(-4px);
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(142, 148, 242, 0.3);
+            box-shadow: 0 20px 40px -15px rgba(142, 148, 242, 0.2);
+        }
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+        /* Tùy chỉnh thanh cuộn */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(11, 8, 19, 0.95);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(142, 148, 242, 0.3);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(142, 148, 242, 0.55);
+        }
 
-jobs:
-  # Build job
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        /* Hiệu ứng trôi nổi nhẹ nhàng */
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .float-box {
+            animation: floatEffect 6s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden min-h-screen font-sans antialiased selection:bg-dreamPurple/30 selection:text-white">
 
-  # Deployment job
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+    <!-- Lớp phủ màu chuyển động ở nền tạo chiều sâu không gian -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-dreamPurple/10 rounded-full blur-[100px]"></div>
+        <div class="absolute top-1/3 right-10 w-80 h-80 bg-dreamPink/10 rounded-full blur-[120px]" style="animation-delay: 2s"></div>
+        <div class="absolute bottom-10 left-1/3 w-96 h-96 bg-dreamBlue/10 rounded-full blur-[110px]" style="animation-delay: 4s"></div>
+    </div>
+
+    <!-- Thanh Menu Điều Hướng -->
+    <nav class="sticky top-0 z-50 glass-panel border-b border-white/5 py-4 px-6 md:px-12 flex justify-between items-center">
+        <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-dreamBlue animate-pulse"></span>
+            <span class="text-sm font-extrabold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-dreamBlue via-dreamPurple to-dreamPink">
+                NHẬT KÝ HỌC TẬP SỐ — NGUYỄN MAI CHI
+            </span>
+        </div>
+        
+        <div class="hidden lg:flex space-x-8 text-[11px] font-bold uppercase tracking-wider text-gray-300">
+            <a href="#home" class="hover:text-dreamBlue transition-colors">Giới Thiệu</a>
+            <a href="#goals" class="hover:text-dreamBlue transition-colors">Mục Tiêu</a>
+            <a href="#portfolio" class="hover:text-dreamBlue transition-colors">Nhật Ký Bài Tập</a>
+            <a href="#reflection" class="hover:text-dreamBlue transition-colors">Góc Nhìn Nhỏ</a>
+        </div>
+
+        <a href="https://drive.google.com/drive/folders/1niFGLIuN1cdLSVn2rG5TtrbwRClzr_MW?usp=drive_link" 
+           target="_blank" 
+           class="glass-panel px-4 py-2.5 rounded-full text-xs font-bold text-dreamBlue hover:text-white hover:bg-dreamBlue/15 transition-all duration-300 border border-dreamBlue/20 hover:border-dreamBlue flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+            Xem bài tập trên GG drive
+        </a>
+    </nav>
+
+    <!-- CONTAINER CHÍNH -->
+    <main class="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-12 space-y-36">
+
+        <!-- SECTION 1: GIỚI THIỆU (Hero) -->
+        <section id="home" class="min-h-[80vh] flex flex-col lg:flex-row items-center justify-center gap-12 pt-4">
+            <div class="flex-1 space-y-6 text-center lg:text-left">
+                <span class="px-4 py-1.5 rounded-full bg-dreamPurple/10 border border-dreamPurple/20 text-xs font-semibold text-dreamBlue tracking-wide inline-flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-dreamPink"></span>
+                    Chào mừng bạn ghé thăm không gian nhỏ của Chi!
+                </span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight tracking-tight">
+                    Mình là một tân sinh viên <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-dreamBlue via-dreamPurple to-dreamPink font-serif italic font-normal">
+                        luôn tò mò về thế giới số
+                    </span>
+                </h1>
+                <p class="text-gray-400 text-sm md:text-base max-w-lg leading-relaxed">
+                    Mình đang theo học ngành Kinh tế và Kinh doanh Quốc tế tại Đại học Kinh tế - ĐHQGHN (UEB). Nơi này giống như một cuốn nhật ký trực quan, ghi lại những trải nghiệm thực tế, những lúc bỡ ngỡ làm quen với máy tính và hành trình ứng dụng AI có trách nhiệm của mình. Hy vọng bạn sẽ tìm thấy điều gì đó thú vị ở đây nhé!
+                </p>
+                <div class="flex flex-wrap justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#portfolio" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-dreamPurple to-dreamPink hover:opacity-95 text-white font-bold text-xs uppercase tracking-wider transition-all shadow-lg shadow-dreamPurple/15 hover:scale-[1.01]">
+                        Xem nhật ký bài tập
+                    </a>
+                    <a href="#goals" class="px-6 py-3.5 rounded-xl glass-panel text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-all hover:bg-white/5 border border-white/10">
+                        Vì sao mình làm trang này?
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex-1 flex justify-center">
+                <div class="relative w-72 h-72 md:w-[340px] md:h-[340px] float-box">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-dreamBlue to-dreamPink rounded-[48px] opacity-20 blur-3xl"></div>
+                    <div class="w-full h-full rounded-[48px] border border-white/10 overflow-hidden shadow-2xl glass-panel p-3">
+                        <img src="Hình 1.jpg" alt="Nguyễn Mai Chi" class="w-full h-full object-cover rounded-[38px] brightness-95">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: MỤC TIÊU PORTFOLIO -->
+        <section id="goals" class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight">Tại sao mình thiết lập Portfolio này?</h2>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-dreamBlue to-dreamPink mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-sm">Đối với mình, trang web này không đơn thuần là một sản phẩm học tập để chấm điểm, mà là nơi mình nhìn lại sự trưởng thành của bản thân qua từng tuần.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-10 h-10 rounded-2xl bg-dreamBlue/10 border border-dreamBlue/20 flex items-center justify-center text-dreamBlue text-xs font-bold">01</div>
+                    <h3 class="text-lg font-bold">Lưu giữ những bước chân đầu tiên</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Từ việc học cách sắp xếp thư mục ngăn nắp đến những bài thảo luận nhóm phức tạp, mình muốn gom tất cả lại một chỗ thật gọn gàng để dễ dàng nhìn lại và chia sẻ với bạn bè.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-10 h-10 rounded-2xl bg-dreamPurple/10 border border-dreamPurple/20 flex items-center justify-center text-dreamPurple text-xs font-bold">02</div>
+                    <h3 class="text-lg font-bold">Làm quen với "Kỹ nghệ trò chuyện" cùng AI</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Thay vì chỉ gõ những câu lệnh ngô nghê, mình đã học được cách định hướng cho AI bằng các ngữ cảnh, quy trình suy nghĩ từng bước và các ràng buộc thú vị để phục vụ tốt nhất cho việc học.
+                    </p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl space-y-4">
+                    <div class="w-10 h-10 rounded-2xl bg-dreamPink/10 border border-dreamPink/20 flex items-center justify-center text-dreamPink text-xs font-bold">03</div>
+                    <h3 class="text-lg font-bold">Tự nhìn nhận và rút kinh nghiệm</h3>
+                    <p class="text-gray-400 text-xs leading-relaxed">
+                        Học công nghệ không phải lúc nào cũng suôn sẻ. Mình muốn ghi lại cả những lúc loay hoay, những bài học nhớ đời về liêm chính học thuật để bản thân ngày một tiến bộ hơn.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: DANH SÁCH BÀI TẬP CHI TIẾT (Tương tác Tuần 1 - 6) -->
+        <section id="portfolio" class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight">Chi Tiết Báo Cáo Thực Hành</h2>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-dreamBlue to-dreamPink mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-sm">Vui lòng nhấp chọn các tab tuần tương ứng dưới đây để xem báo cáo thực nghiệm, sơ đồ cấu trúc trực quan và bài học kinh nghiệm chi tiết.</p>
+                
+                <div class="pt-2">
+                    <a href="https://drive.google.com/drive/folders/1niFGLIuN1cdLSVn2rG5TtrbwRClzr_MW?usp=drive_link" 
+                       target="_blank" 
+                       class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-dreamBlue/10 hover:bg-dreamBlue/20 text-dreamBlue hover:text-white transition-all duration-300 border border-dreamBlue/20 hover:border-dreamBlue text-xs font-bold uppercase tracking-wider">
+                        <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+                        Thư mục bài tập trên GG Drive
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="flex flex-wrap justify-center gap-2 md:gap-3 p-2 glass-panel rounded-2xl max-w-4xl mx-auto">
+                <button onclick="switchTab('week1')" id="btn-week1" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 bg-dreamPurple/20 text-white">Bài 1 (Tuần 1)</button>
+                <button onclick="switchTab('week2')" id="btn-week2" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 text-gray-400 hover:text-white">Bài 2 (Tuần 2)</button>
+                <button onclick="switchTab('week3')" id="btn-week3" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 text-gray-400 hover:text-white">Bài 3 (Tuần 3)</button>
+                <button onclick="switchTab('week4')" id="btn-week4" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 text-gray-400 hover:text-white">Bài 4 (Tuần 4)</button>
+                <button onclick="switchTab('week5')" id="btn-week5" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 text-gray-400 hover:text-white">Bài 5 (Tuần 5)</button>
+                <button onclick="switchTab('week6')" id="btn-week6" class="tab-btn px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 text-gray-400 hover:text-white">Bài 6 (Tuần 6)</button>
+            </div>
+
+            <!-- TAB PANELS -->
+            <div class="max-w-4xl mx-auto min-h-[500px]">
+                
+                <!-- BÀI 1 (TUẦN 1) -->
+                <div id="week1" class="tab-panel space-y-6 transition-all duration-300">
+                    <div class="glass-card p-8 rounded-3xl space-y-8">
+                        <div class="border-b border-white/5 pb-4">
+                            <span class="text-[10px] text-dreamBlue uppercase font-bold tracking-widest">Tên bài tập trong chương trình:</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Bài 1 - Bài tập 1 của mục 1.4: Thao tác cơ bản với tệp tin và thư mục</h3>
+                        </div>
+
+                        <!-- Mục tiêu và Bài học -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs bg-white/[0.01] p-6 rounded-2xl border border-white/5">
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamBlue">Chi muốn đạt được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Mục tiêu đầu tiên của mình là tập thói quen sắp xếp không gian máy tính gọn gàng, hệ thống các thư mục khoa học để sau này học các môn nghiên cứu phức tạp hơn không bị mất thời gian tìm file.
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamPink">Chi chiêm nghiệm được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Ngăn nắp từ những tệp tin nhỏ nhất chính là bước đầu của phong cách làm việc chuyên nghiệp. Đặt tên file rõ ràng, không dấu, có logic sẽ giúp tụi mình tiết kiệm cực kỳ nhiều thời gian về sau đấy!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Sơ đồ cấu trúc cây thư mục trực quan hóa -->
+                        <div class="p-6 rounded-2xl bg-black/40 border border-white/5 space-y-4">
+                            <h4 class="text-xs font-bold text-dreamBlue flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                                Sơ Đồ Cấu Trúc Thư Mục Sau Khi Chi Hoàn Thành
+                            </h4>
+                            <div class="font-mono text-xs text-gray-300 space-y-1.5 pl-4 border-l border-white/10">
+                                <div>📁 Máy tính của Chi / Ổ đĩa (D:) hoặc (C:)</div>
+                                <div class="pl-6">└── 📁 <span class="text-dreamBlue font-bold">ThucHanh_NguyenMaiChi</span> <span class="text-[10px] text-gray-500">(Thư mục gốc tụi mình tạo nha)</span></div>
+                                <div class="pl-12">├── 📁 <span class="text-dreamPink font-bold">TaiLieu</span> <span class="text-[10px] text-gray-500">(Folder con để phân loại file)</span></div>
+                                <div class="pl-16" style="padding-left: 4.5rem;">├── 📄 <span class="text-gray-400">GhiChuQuanTrong.txt</span> <span class="text-[10px] text-green-400">(File đã copy vào đây thành công nè)</span></div>
+                                <div class="pl-16" style="padding-left: 4.5rem;">└── 📄 <span class="text-gray-500 line-through">DiChuyen.txt</span> <span class="text-[10px] text-red-400">(Tệp đã được xóa vĩnh viễn bằng Shift + Delete)</span></div>
+                                <div class="pl-12">└── 📄 <span class="text-gray-400">GhiChuQuanTrong.txt</span> <span class="text-[10px] text-yellow-400">(Tệp khôi phục lại từ Thùng rác)</span></div>
+                            </div>
+                        </div>
+
+                        <!-- Bảng điều khiển tương tác 12 bước chi tiết -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-dreamPurple flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-dreamPurple rounded-full"></span>
+                                Tụi mình cùng đi qua 12 bước thực hành của Chi nhé (Bấm để xem hướng dẫn nha)
+                            </h4>
+                            
+                            <div class="grid grid-cols-4 md:grid-cols-12 gap-1.5">
+                                <script>
+                                    for(let i=1; i<=12; i++) {
+                                        document.write(`<button onclick="selectStep(${i})" id="step-btn-${i}" class="step-selector px-1 py-1.5 rounded-lg border text-[10px] font-bold transition-all duration-200 ${i===1 ? 'bg-dreamBlue/20 border-dreamBlue text-white' : 'border-white/5 bg-white/[0.01] text-gray-500 hover:text-white'}">B${i}</button>`);
+                                    }
+                                </script>
+                            </div>
+
+                            <div id="step-console" class="p-5 rounded-2xl bg-black/45 border border-white/5 font-mono text-xs space-y-3 min-h-[120px] flex flex-col justify-between">
+                                <div id="step-desc" class="text-gray-300 leading-relaxed"></div>
+                                <div class="flex justify-between items-center text-[10px] text-gray-500 border-t border-white/5 pt-2">
+                                    <span id="step-action"></span>
+                                    <span id="step-shortcut"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 2 (TUẦN 2) -->
+                <div id="week2" class="tab-panel hidden space-y-6 transition-all duration-300">
+                    <div class="glass-card p-8 rounded-3xl space-y-8">
+                        <div class="border-b border-white/5 pb-4">
+                            <span class="text-[10px] text-dreamBlue uppercase font-bold tracking-widest">Tên bài tập trong chương trình:</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Bài 2 - Bài tập 2 của mục 2.4: Tìm kiếm và đánh giá thông tin học thuật</h3>
+                        </div>
+
+                        <!-- Mục tiêu và Bài học -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs bg-white/[0.01] p-6 rounded-2xl border border-white/5">
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamBlue">Chi muốn đạt được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Mình muốn học cách tìm kiếm và đánh giá chất lượng của các tài liệu nghiên cứu xoay quanh chủ đề "Dòng vốn đầu tư trực tiếp nước ngoài (FDI) ảnh hưởng thế nào đến tăng trưởng kinh tế ở các nước đang phát triển".
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamPink">Chi chiêm nghiệm được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Không phải thông tin nào trên mạng cũng đúng. Là sinh viên kinh tế, tụi mình cần giữ một cái đầu lạnh, học cách so sánh phương pháp và độ tin cậy của các bài báo trước khi đưa vào bài viết của mình.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Danh sách chi tiết 10 nguồn thông tin không cắt bớt -->
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <h4 class="text-xs font-bold text-dreamPurple flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-dreamPurple rounded-full"></span>
+                                    Danh sách 10 nguồn tài liệu uy tín vĩ mô mà Chi đã thẩm định
+                                </h4>
+                                <div class="flex gap-2">
+                                    <button onclick="filterSource('all')" class="filter-btn px-2 py-1 rounded bg-dreamBlue/20 text-white text-[10px] font-bold border border-dreamBlue/30">Tất cả</button>
+                                    <button onclick="filterSource('vietnam')" class="filter-btn px-2 py-1 text-gray-400 hover:text-white text-[10px] font-bold border border-white/5 bg-white/[0.01]">Việt Nam</button>
+                                    <button onclick="filterSource('intl')" class="filter-btn px-2 py-1 text-gray-400 hover:text-white text-[10px] font-bold border border-white/5 bg-white/[0.01]">Quốc Tế</button>
+                                </div>
+                            </div>
+
+                            <!-- Bảng dữ liệu chi tiết -->
+                            <div class="overflow-x-auto rounded-xl border border-white/5">
+                                <table class="w-full text-left border-collapse text-xs">
+                                    <thead>
+                                        <tr class="bg-white/[0.03] text-gray-300 font-bold border-b border-white/5">
+                                            <th class="p-3 w-10 text-center">STT</th>
+                                            <th class="p-3 w-[260px]">Tài liệu & Tác giả</th>
+                                            <th class="p-3 w-28">Nguồn</th>
+                                            <th class="p-3 w-24 text-center">Độ tin cậy</th>
+                                            <th class="p-3">Tóm tắt nội dung & Phương pháp nghiên cứu</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="source-table-body" class="divide-y divide-white/5 text-gray-400">
+                                        <!-- Điền tự động bằng Javascript phía dưới -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 3 (TUẦN 3) -->
+                <div id="week3" class="tab-panel hidden space-y-6 transition-all duration-300">
+                    <div class="glass-card p-8 rounded-3xl space-y-8">
+                        <div class="border-b border-white/5 pb-4">
+                            <span class="text-[10px] text-dreamBlue uppercase font-bold tracking-widest">Tên bài tập trong chương trình:</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Bài 3 - Bài tập 2 của mục 3.4: Viết Prompt hiệu quả cho các tác vụ học tập</h3>
+                        </div>
+
+                        <!-- Mục tiêu và Bài học -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs bg-white/[0.01] p-6 rounded-2xl border border-white/5">
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamBlue">Chi muốn đạt được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Mình muốn học cách "trò chuyện" hiệu quả nhất với AI thông qua việc xây dựng 3 cấp độ câu lệnh để hỗ trợ Chi tóm tắt tài liệu, giải thích bài học khó và tự soạn câu hỏi ôn thi.
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamPink">Chi chiêm nghiệm được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    AI thông minh hay không phụ thuộc rất lớn vào cách tụi mình đặt câu hỏi. Khi tụi mình đưa cho AI một vai trò cụ thể, một quy trình suy nghĩ từng bước và các ràng buộc rõ ràng, câu trả lời nhận được sẽ cực kỳ chất lượng.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Trình chọn tác vụ so sánh chi tiết -->
+                        <div class="space-y-4">
+                            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                                <h4 class="text-xs font-bold text-dreamPurple flex items-center gap-2">
+                                    <span class="w-1.5 h-1.5 bg-dreamPurple rounded-full"></span>
+                                    Cùng Chi so sánh 3 phiên bản câu lệnh dưới đây nhé!
+                                </h4>
+                                <div class="flex flex-wrap gap-1.5">
+                                    <button onclick="selectPromptTask(1)" id="btn-pt-1" class="pt-btn px-2.5 py-1.5 rounded-lg bg-dreamBlue/20 text-white text-[10px] font-bold border border-dreamBlue/30">Tác vụ 1: Tóm tắt bài báo</button>
+                                    <button onclick="selectPromptTask(2)" id="btn-pt-2" class="pt-btn px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white text-[10px] font-bold border border-white/5 bg-white/[0.01]">Tác vụ 2: Giải thích khái niệm</button>
+                                    <button onclick="selectPromptTask(3)" id="btn-pt-3" class="pt-btn px-2.5 py-1.5 rounded-lg text-gray-400 hover:text-white text-[10px] font-bold border border-white/5 bg-white/[0.01]">Tác vụ 3: Tự soạn đề ôn tập</button>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs font-mono">
+                                <div class="p-4 rounded-2xl bg-red-500/[0.02] border border-red-500/10 space-y-2">
+                                    <span class="font-bold text-red-400 uppercase text-[9px] block">Cấp độ A: Câu lệnh sơ khai</span>
+                                    <p id="prompt-vA" class="text-gray-400 leading-relaxed italic"></p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-yellow-500/[0.02] border border-yellow-500/10 space-y-2">
+                                    <span class="font-bold text-yellow-400 uppercase text-[9px] block">Cấp độ B: Đã cải tiến hơn</span>
+                                    <p id="prompt-vB" class="text-gray-400 leading-relaxed italic"></p>
+                                </div>
+                                <div class="p-4 rounded-2xl bg-green-500/[0.02] border border-green-500/15 space-y-2">
+                                    <span class="font-bold text-green-400 uppercase text-[9px] block">Cấp độ C: Đỉnh cao (Chi áp dụng C-A-R-E)</span>
+                                    <p id="prompt-vC" class="text-gray-100 leading-relaxed italic font-medium"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 4 (TUẦN 4) -->
+                <div id="week4" class="tab-panel hidden space-y-6 transition-all duration-300">
+                    <div class="glass-card p-8 rounded-3xl space-y-8">
+                        <div class="border-b border-white/5 pb-4">
+                            <span class="text-[10px] text-dreamBlue uppercase font-bold tracking-widest">Tên bài tập trong chương trình:</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Bài 4 - Bài tập 3 của mục 4.4: Sử dụng công cụ hợp tác trực tuyến cho dự án nhóm</h3>
+                        </div>
+
+                        <!-- Mục tiêu và Bài học -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs bg-white/[0.01] p-6 rounded-2xl border border-white/5">
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamBlue">Chi muốn đạt được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Mình cùng nhóm thiết lập một không gian làm việc trực tuyến nhịp nhàng qua Trello, Google Drive, Docs và Discord để cùng nhau xây dựng cuốn Cẩm nang học từ vựng cho các bạn tân sinh viên chuyên ngành Ngôn ngữ.
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamPink">Chi chiêm nghiệm được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Làm việc nhóm online không chỉ đơn giản là tạo nhóm chat rồi mạnh ai nấy làm. Phải có sự phân vai rõ ràng, tôn trọng không gian chung và biết cách quản lý thông báo để tránh bị stress trong môi trường số.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Quá trình diễn ra chi tiết thiết lập các công cụ -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-dreamBlue flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/></svg>
+                                Chi đã phân chia và vận hành các công cụ cùng nhóm như thế nào?
+                            </h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <h5 class="font-bold text-dreamBlue">1. Bảng công việc (Trello)</h5>
+                                    <p class="text-gray-400 leading-relaxed">Mình phân chia các đầu việc thành các thẻ màu dễ nhìn (Đỏ là khẩn cấp, Vàng là đang làm, Xanh là xong rồi). Chi cũng cài đặt tự động gửi mail báo nhắc khi có việc sắp đến hạn chặng.</p>
+                                </div>
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <h5 class="font-bold text-dreamPink">2. Đồng soạn thảo (Google Docs)</h5>
+                                    <p class="text-gray-400 leading-relaxed">Đây là nơi cả nhóm cùng nhau viết bài. Chi chịu trách nhiệm nội dung chính nên đã trực tiếp viết hơn 1.500 từ và thường xuyên tag tên các bạn vào để thảo luận chỉnh sửa trực tiếp.</p>
+                                </div>
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <h5 class="font-bold text-dreamPurple">3. Kho tài nguyên (Google Drive)</h5>
+                                    <p class="text-gray-400 leading-relaxed">Chi tổ chức thư mục thành 3 tầng siêu khoa học từ thư mục tài liệu thô, ảnh minh họa cho đến folder chứa file hoàn thiện. Mình chỉ cấp quyền sửa cho ban nội dung và quyền xem cho ban kiểm định.</p>
+                                </div>
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <h5 class="font-bold text-dreamBlue">4. Phòng thảo luận (Discord)</h5>
+                                    <p class="text-gray-400 leading-relaxed">Tụi mình chia các phòng chat riêng để thảo luận từng phần việc nhằm tránh làm trôi tin nhắn. Trung bình mỗi tuần Chi có khoảng 14 lượt tương tác để duyệt nhanh các ý tưởng thiết kế phát sinh.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trực quan 3 thách thức và 3 giải pháp -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-dreamPurple flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-dreamPurple rounded-full"></span>
+                                Những lúc nhóm Chi gặp rắc rối và cách tụi mình vượt qua:
+                            </h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
+                                <div class="p-5 rounded-2xl border border-white/5 bg-white/[0.01] space-y-3">
+                                    <span class="text-dreamPink uppercase tracking-widest text-[9px] font-bold block">Rắc rối 01</span>
+                                    <h5 class="font-bold text-white">Lệch giờ sinh hoạt & chậm trả lời tin</h5>
+                                    <p class="text-gray-400 leading-relaxed">Đợt đi học quân sự, lịch sinh hoạt của các thành viên cực kỳ lệch nhau khiến việc thảo luận bị ngắt quãng, không thống nhất được ý kiến.</p>
+                                    <div class="p-3 rounded-xl bg-dreamBlue/5 border border-dreamBlue/10 text-dreamBlue">
+                                        <strong>Cách Chi giải quyết:</strong> Tụi mình thống nhất một "khung giờ vàng" (từ 21h00 đến 22h00 tối) để cả nhóm cùng online Discord gọi thoại giải quyết nhanh dứt điểm các vướng mắc.
+                                    </div>
+                                </div>
+                                
+                                <div class="p-5 rounded-2xl border border-white/5 bg-white/[0.01] space-y-3">
+                                    <span class="text-dreamPink uppercase tracking-widest text-[9px] font-bold block">Rắc rối 02</span>
+                                    <h5 class="font-bold text-white">Rối tung định dạng khi đồng soạn thảo</h5>
+                                    <p class="text-gray-400 leading-relaxed">Nhiều bạn cùng nhào vô viết một lúc trên Google Docs làm xáo trộn định dạng văn bản và trùng lặp ý tưởng bài viết của nhau.</p>
+                                    <div class="p-3 rounded-xl bg-dreamPink/5 border border-dreamPink/10 text-dreamPink">
+                                        <strong>Cách Chi giải quyết:</strong> Chi thiết kế một bảng phân chia vùng viết bài rõ ràng ngay đầu trang. Ai muốn sửa bài của bạn khác thì bắt buộc phải chuyển qua chế độ Đề xuất (Suggesting).
+                                    </div>
+                                </div>
+
+                                <div class="p-5 rounded-2xl border border-white/5 bg-white/[0.01] space-y-3">
+                                    <span class="text-dreamPink uppercase tracking-widest text-[9px] font-bold block">Rắc rối 03</span>
+                                    <h5 class="font-bold text-white">Thông báo réo liên tục nhức hết cả đầu</h5>
+                                    <p class="text-gray-400 leading-relaxed">Hệ thống từ Discord, Trello, Drive gửi thông báo tự động liên tục làm tụi mình bị xao nhãng việc học và dễ bỏ sót tin nhắn quan trọng.</p>
+                                    <div class="p-3 rounded-xl bg-dreamPurple/5 border border-dreamPurple/10 text-dreamPurple">
+                                        <strong>Cách Chi giải quyết:</strong> Mình chủ động cấu hình tắt bớt thông báo đẩy của các phòng chat chung, chỉ bật cảnh báo khi có bạn tag trực tiếp tên mình vào hoặc có việc khẩn cấp.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 5 (TUẦN 5) -->
+                <div id="week5" class="tab-panel hidden space-y-6 transition-all duration-300">
+                    <div class="glass-card p-8 rounded-3xl space-y-8">
+                        <div class="border-b border-white/5 pb-4">
+                            <span class="text-[10px] text-dreamBlue uppercase font-bold tracking-widest">Tên bài tập trong chương trình:</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Bài 5 - Bài tập 2 của mục 5.4: Sử dụng công cụ AI tạo sinh để hỗ trợ sáng tạo nội dung</h3>
+                        </div>
+
+                        <!-- Mục tiêu và Bài học -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs bg-white/[0.01] p-6 rounded-2xl border border-white/5">
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamBlue">Chi muốn đạt được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Mình muốn thử thách bản thân tạo ra tập san số hóa "Giải mã Lục thư: Góc nhìn kỹ thuật số Mô hình IS-LM-BP" dưới tác động tăng lãi suất của FED. Mục tiêu là biến những kiến thức vĩ mô khô khan thành hình ảnh trực quan sinh động nhất.
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamPink">Chi chiêm nghiệm được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    AI tạo sinh thực sự rất giỏi ở khâu làm trợ lý gợi ý khung ý tưởng. Nhưng để có một bài phân tích chuẩn mực học thuật vĩ mô của UEB, chính bản thân mình phải tự tay biên tập, sửa lỗi và vẽ lại các đường cong đồ họa (>50% nỗ lực cá nhân).
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Quy trình phối hợp 3 giai đoạn chi tiết gấp đôi -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-dreamBlue flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 9.172V5L8 4z"/></svg>
+                                Hành trình Chi tự tay làm tập san số hóa cùng AI:
+                            </h4>
+                            
+                            <div class="space-y-4 text-xs leading-relaxed">
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <span class="text-dreamBlue font-bold block">Giai đoạn 1: Lên khung nội dung cùng Google Gemini</span>
+                                    <p class="text-gray-400"><strong>Cách mình làm:</strong> Chi dùng các câu lệnh điều kiện nâng cao để yêu cầu Gemini đóng vai chuyên gia kinh tế vĩ mô, giải thích mô hình kinh tế một cách ngắn gọn, không dùng từ sáo rỗng hay thuật ngữ quá khó hiểu.</p>
+                                    <p class="text-gray-400"><strong>Chi tinh chỉnh thực tế:</strong> Lời giải của AI lúc đầu nghe khá rập khuôn. Mình đã tự tay đối chiếu với giáo trình của UEB, tự viết lại toàn bộ phần lời dẫn dắt và bổ sung các ví dụ thực tế về tỷ giá hối đoái Việt Nam để các bạn sinh viên dễ hình dung nhất.</p>
+                                </div>
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <span class="text-dreamPink font-bold block">Giai đoạn 2: Tạo hình ảnh trực quan bằng Banana Pro</span>
+                                    <p class="text-gray-400"><strong>Cách mình làm:</strong> Mình nhập các dòng lệnh chi tiết yêu cầu vẽ sơ đồ luồng vốn dịch chuyển dưới tác động tăng lãi suất của FED.</p>
+                                    <p class="text-gray-400"><strong>Chi tinh chỉnh thực tế:</strong> Nét vẽ do AI xuất ra ban đầu thường bị méo mó, không đúng chuẩn của các đường dịch chuyển vĩ mô. Mình đã mang tệp ảnh này vào phần mềm đồ họa chuyên dụng, tự tay nắn lại từng mũi tên dịch chuyển và đồng bộ hóa lại bảng màu cho bắt mắt.</p>
+                                </div>
+                                <div class="p-5 rounded-2xl bg-white/[0.01] border border-white/5 space-y-2">
+                                    <span class="text-dreamPurple font-bold block">Giai đoạn 3: Dàn trang và hoàn thiện trên Canva AI</span>
+                                    <p class="text-gray-400"><strong>Cách mình làm:</strong> Chi dùng tính năng Magic Design để gợi ý nhanh các khung lưới thiết kế (layout grid) dựa trên các từ khóa của chủ đề.</p>
+                                    <p class="text-gray-400"><strong>Chi tinh chỉnh thực tế:</strong> Canva AI thường xuyên bị lỗi hiển thị font chữ tiếng Việt và căn chỉnh khoảng cách chưa được đẹp. Mình đã tự cấu hình lại hệ thống thị giác, chỉnh lại lề và trực tiếp kéo thả lại các khối chữ để trang tập san trông thật chuyên nghiệp và thơ mộng.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bảng đối chiếu so sánh tính năng hệ thống AI -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-dreamPurple flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-dreamPurple rounded-full"></span>
+                                Ma trận so sánh tính năng các công cụ AI Chi đã trải nghiệm thực tế:
+                            </h4>
+                            <div class="overflow-x-auto rounded-xl border border-white/5 text-[11px] leading-relaxed">
+                                <table class="w-full text-left border-collapse">
+                                    <thead>
+                                        <tr class="bg-white/[0.03] text-gray-300 font-bold border-b border-white/5">
+                                            <th class="p-3 w-32">Nhóm công cụ</th>
+                                            <th class="p-3 w-40">Công cụ</th>
+                                            <th class="p-3">Điểm mạnh nổi bật Chi thấy</th>
+                                            <th class="p-3">Hạn chế Chi nhận ra</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-white/5 text-gray-400">
+                                        <tr>
+                                            <td class="p-3 font-bold text-white" rowspan="2">Hỗ trợ viết bài</td>
+                                            <td class="p-3 text-dreamBlue font-semibold">Google Gemini (Chính)</td>
+                                            <td class="p-3">Cập nhật tin tức nhanh, từ ngữ kinh tế dịch tự nhiên, dễ đọc.</td>
+                                            <td class="p-3">Nhiều lúc thảo luận dài dòng quá là AI sẽ bị quên bối cảnh lúc đầu.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 text-dreamPink font-semibold">ChatGPT (Đối chứng)</td>
+                                            <td class="p-3">Tư duy logic tốt, hiểu và thực hiện cực kỳ chính xác các câu lệnh có điều kiện.</td>
+                                            <td class="p-3">Giọng văn thô đôi khi hơi rập khuôn, chỉ thích hợp để liệt kê thông tin.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold text-white" rowspan="2">Hỗ trợ vẽ ảnh</td>
+                                            <td class="p-3 text-dreamBlue font-semibold">Banana Pro (Chính)</td>
+                                            <td class="p-3">Tốc độ vẽ rất nhanh, dễ dùng, hiểu tốt các từ khóa về phong cách mỹ thuật.</td>
+                                            <td class="p-3">Khó vẽ chính xác các biểu đồ đồ thị kinh tế có các biến số cụ thể.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 text-dreamPink font-semibold">Midjourney (Đối chứng)</td>
+                                            <td class="p-3">Ảnh xuất ra cực kỳ chi tiết, nghệ thuật và mang phong cách cổ điển rất thơ.</td>
+                                            <td class="p-3">Phải thao tác qua Discord nên hơi phức tạp với các bạn mới làm quen.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 font-bold text-white" rowspan="2">Hỗ trợ dàn trang</td>
+                                            <td class="p-3 text-dreamBlue font-semibold">Canva AI (Chính)</td>
+                                            <td class="p-3">Kho mẫu cực kỳ phong phú, gợi ý khung lưới dàn trang siêu tốc độ.</td>
+                                            <td class="p-3">Các mẫu có sẵn hơi đại trà, tự động chèn chữ hay bị lỗi hiển thị dấu tiếng Việt.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-3 text-dreamPink font-semibold">Adobe Firefly (Đối chứng)</td>
+                                            <td class="p-3">Tích hợp sâu vào Photoshop chuyên nghiệp, khả năng mở rộng viền ảnh cực đỉnh.</td>
+                                            <td class="p-3">Có phí bản quyền khá cao, giao diện tạo layout tự động chưa thân thiện bằng Canva.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BÀI 6 (TUẦN 6) -->
+                <div id="week6" class="tab-panel hidden space-y-6 transition-all duration-300">
+                    <div class="glass-card p-8 rounded-3xl space-y-8">
+                        <div class="border-b border-white/5 pb-4">
+                            <span class="text-[10px] text-dreamBlue uppercase font-bold tracking-widest">Tên bài tập trong chương trình:</span>
+                            <h3 class="text-xl font-bold mt-1 text-white">Bài 6 - Bài tập 4 của mục 6.4: Sử dụng AI có trách nhiệm trong học tập và nghiên cứu</h3>
+                        </div>
+
+                        <!-- Mục tiêu và Bài học -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs bg-white/[0.01] p-6 rounded-2xl border border-white/5">
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamBlue">Chi muốn đạt được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    Mình muốn tìm hiểu sâu về chính sách quản trị AI của nhà trường UEB và tự thiết lập một bộ quy tắc ứng xử học thuật cá nhân nghiêm túc, vẽ infographic minh họa đạo đức trong kỷ nguyên số.
+                                </p>
+                            </div>
+                            <div class="space-y-2">
+                                <h4 class="font-bold text-dreamPink">Chi chiêm nghiệm được gì?</h4>
+                                <p class="text-gray-400 leading-relaxed">
+                                    AI giỏi thật đấy, nhưng Chi luôn tự nhắc nhở bản thân không được lười biếng phó mặc bài vở cho máy móc. AI chỉ nên là một người trợ lý đồng hành, còn chất xám tự thân mới là thứ giúp tụi mình tiến xa.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 5 nguyên tắc ứng xử trách nhiệm -->
+                        <div class="space-y-4">
+                            <h4 class="text-xs font-bold text-dreamPurple flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 bg-dreamPurple rounded-full"></span>
+                                Bộ 5 quy tắc "sống chung với AI" do Chi tự đặt ra cho mình:
+                            </h4>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 text-xs">
+                                <div class="p-4 rounded-xl border border-white/5 bg-white/[0.01] space-y-1.5">
+                                    <span class="font-bold text-dreamBlue text-[10px] uppercase block">Quy tắc 1</span>
+                                    <h5 class="font-bold text-white">Ý tưởng gốc tự thân</h5>
+                                    <p class="text-gray-400 leading-relaxed">Luôn tự suy nghĩ định hình dàn bài thô bằng tư duy cá nhân trước khi mở bất kỳ công cụ AI nào lên nhé.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-white/5 bg-white/[0.01] space-y-1.5">
+                                    <span class="font-bold text-dreamPink text-[10px] uppercase block">Quy tắc 2</span>
+                                    <h5 class="font-bold text-white">Bộ lọc hoài nghi</h5>
+                                    <p class="text-gray-400 leading-relaxed">Tuyệt đối không chép luôn số liệu hay thông tin AI cung cấp mà bắt buộc phải đối chiếu kiểm chứng lại từ nguồn chính thống.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-white/5 bg-white/[0.01] space-y-1.5">
+                                    <span class="font-bold text-dreamPurple text-[10px] uppercase block">Quy tắc 3</span>
+                                    <h5 class="font-bold text-white">Giữ chất xám tối thiểu 50%</h5>
+                                    <p class="text-gray-400 leading-relaxed">Đảm bảo hàm lượng phân tích sâu và ngôn từ cá nhân của Chi luôn chiếm phần lớn cấu trúc bài nộp cuối cùng.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-white/5 bg-white/[0.01] space-y-1.5">
+                                    <span class="font-bold text-dreamBlue text-[10px] uppercase block">Quy tắc 4</span>
+                                    <h5 class="font-bold text-white">Minh bạch khi trích nguồn</h5>
+                                    <p class="text-gray-400 leading-relaxed">Luôn chủ động khai báo rõ ràng tên công cụ AI đã dùng, phạm vi hỗ trợ ở mục tài liệu tham khảo một cách trung thực nhất.</p>
+                                </div>
+                                <div class="p-4 rounded-xl border border-white/5 bg-white/[0.01] space-y-1.5">
+                                    <span class="font-bold text-dreamPink text-[10px] uppercase block">Quy tắc 5</span>
+                                    <h5 class="font-bold text-white">Rèn luyện kỹ năng cốt lõi</h5>
+                                    <p class="text-gray-400 leading-relaxed">Chỉ nhờ AI hỗ trợ các việc cơ học, tuyệt đối không dùng AI thay thế các bài tập luyện viết, dịch và kỹ năng nói tự thân.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Trực quan hóa sơ đồ Infographic Đạo đức AI -->
+                        <div class="p-6 rounded-2xl bg-black/40 border border-white/5 space-y-4">
+                            <h4 class="text-xs font-bold text-dreamBlue flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5a2 2 0 10-2 2h2zm-2 4h4m-4 4h4m-4 4h4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                                Bản phác thảo Infographic Đạo đức AI mà Chi thiết kế
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 text-center text-xs">
+                                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                    <div class="text-dreamBlue font-bold mb-1">💡 1. Ý tưởng của Chi</div>
+                                    <p class="text-gray-500 text-[10px]">Tự phác thảo cấu trúc bài làm trước khi tham khảo dữ liệu.</p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                    <div class="text-dreamPink font-bold mb-1">🔍 2. Kiểm chứng chéo</div>
+                                    <p class="text-gray-500 text-[10px]">Luôn so sánh dữ liệu AI với tài liệu sách chính thống.</p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                    <div class="text-dreamPurple font-bold mb-1">📊 3. Chất xám cá nhân > 50%</div>
+                                    <p class="text-gray-500 text-[10px]">Đóng góp phân tích sâu tự thân đóng vai trò chủ đạo.</p>
+                                </div>
+                                <div class="p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                                    <div class="text-dreamBlue font-bold mb-1">📝 4. Trích dẫn minh bạch</div>
+                                    <p class="text-gray-500 text-[10px]">Khai báo thành thật tên công cụ và mục đích sử dụng.</p>
+                                </div>
+                            </div>
+                            <div class="text-center text-[10px] text-gray-500 pt-2">
+                                Bộ quy tắc ứng xử thân thiện trong kỷ nguyên số — Sinh viên Đại học Ngoại ngữ / Đại học Kinh tế
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 5: TỔNG KẾT CHI TIẾT (Khó khăn, thuận lợi, bài học) -->
+        <section id="reflection" class="space-y-12">
+            <div class="text-center max-w-2xl mx-auto space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight">Chi Chia Sẻ Một Chút Về Chặng Đường Đã Qua</h2>
+                <div class="w-16 h-0.5 bg-gradient-to-r from-dreamBlue to-dreamPink mx-auto rounded-full"></div>
+                <p class="text-gray-400 text-sm">Cái nhìn tổng thể, sâu sắc nhất về hành trình học phần dưới tư cách là sinh viên ngành Kinh tế Quốc tế.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-xs leading-relaxed">
+                <!-- Thuận lợi -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 hover:border-dreamBlue/30">
+                    <div class="w-10 h-10 rounded-2xl bg-dreamBlue/10 border border-dreamBlue/20 flex items-center justify-center text-dreamBlue text-sm font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Những điểm tựa giúp Chi đi nhanh hơn</h3>
+                    <p class="text-gray-400">
+                        Mình cảm thấy rất may mắn khi nhà trường UEB luôn có cái nhìn cởi mở và khuyến khích sinh viên tự do trải nghiệm công nghệ mới. Thầy cô không cấm đoán cực đoan mà luôn định hướng cách tụi mình dùng AI có trách nhiệm.
+                    </p>
+                    <p class="text-gray-400">
+                        Sự phát triển vượt bậc của các nền tảng AI miễn phí cũng giúp việc chuẩn bị các tư liệu thô, phác thảo dàn ý diễn ra nhanh chóng, giải phóng bớt các công việc tẻ nhạt để mình tập trung sáng tạo nội dung chuyên môn.
+                    </p>
+                </div>
+
+                <!-- Khó khăn -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 hover:border-dreamPink/30">
+                    <div class="w-10 h-10 rounded-2xl bg-dreamPink/10 border border-dreamPink/20 flex items-center justify-center text-dreamPink text-sm font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Những lúc Chi "bí" và "nản"</h3>
+                    <p class="text-gray-400">
+                        Hạn chế lớn nhất của các mô hình AI hiện nay là tính chính xác trong phân tích kinh tế vĩ mô lượng hóa. Nếu tụi mình lười biếng nhắm mắt sao chép luôn dữ liệu của AI, bài viết sẽ trở nên hời hợt, thiếu căn cứ thực tế và mang một lớp vỏ bọc thiết kế sáo rỗng.
+                    </p>
+                    <p class="text-gray-400">
+                        Bên cạnh đó, việc làm việc nhóm từ xa cũng đôi khi khiến tụi mình mệt mỏi vì thông báo quá tải từ các phòng chat khác nhau, nhất là những hôm vướng lịch học quân sự lệch giờ.
+                    </p>
+                </div>
+
+                <!-- Bài học -->
+                <div class="glass-card p-8 rounded-3xl space-y-4 hover:border-dreamPurple/30">
+                    <div class="w-10 h-10 rounded-2xl bg-dreamPurple/10 border border-dreamPurple/20 flex items-center justify-center text-dreamPurple text-sm font-bold">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="text-base font-bold text-white">Mấy điều quý giá Chi học được</h3>
+                    <p class="text-gray-400">
+                        Hành trình học phần này đã định hình cho mình một lối tư duy có tổ chức khoa học. Việc sắp xếp hệ thống thư mục logic hay đặt tên tệp ngăn nắp không đơn thuần là thao tác kỹ thuật, mà là biểu hiện của phong cách làm việc nghiêm túc, chuyên nghiệp.
+                    </p>
+                    <p class="text-gray-400">
+                        Đối với việc ứng dụng AI, Chi nhận ra rằng kỹ năng viết prompt tốt mới chỉ là bước khởi đầu. Tư duy độc lập, bộ lọc hoài nghi khoa học và đạo đức liêm chính học thuật mới là kim chỉ nam giúp tụi mình tự tin tiến xa trên chặng đường sắp tới.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="glass-panel border-t border-white/5 py-12 mt-32 text-center text-xs text-gray-500 space-y-2 relative z-10">
+        <p class="font-bold tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-dreamBlue to-dreamPink">NGUYỄN MAI CHI — UEB VNU</p>
+        <p>© 2026. Học phần Nhập môn Công nghệ số và Ứng dụng trí tuệ nhân tạo. Đã hoàn thành hệ thống hóa tất cả dữ liệu thực nghiệm học thuật.</p>
+    </footer>
+
+
+    <!-- JAVASCRIPT ĐIỀU KHIỂN HOẠT ĐỘNG TƯƠNG TÁC (NO CITATION, TIẾNG VIỆT HOÀN HẢO) -->
+    <script>
+        // 1. DỮ LIỆU BÀI 1: 12 BƯỚC THAO TÁC CƠ BẢN
+        const week1Steps = {
+            1: {
+                desc: "Bước 1: Mở File Explorer bằng cách nhấn tổ hợp phím Windows + E hoặc nhấp vào biểu tượng thư mục màu vàng quen thuộc trực tiếp trên thanh tác vụ của hệ điều hành Windows.",
+                action: "Nhấp chuột trái vào biểu tượng thư mục",
+                shortcut: "Windows + E"
+            },
+            2: {
+                desc: "Bước 2: Truy cập ổ đĩa hoặc thư mục làm việc. Tại cột điều hướng bên trái, nhấp chọn mục This PC, sau đó nhấp đúp để vào ổ đĩa không phải ổ hệ thống (như ổ D: hoặc E:). Nếu máy của bạn chỉ có duy nhất một ổ C:, hãy chọn thư mục Documents.",
+                action: "Double click chuột trái",
+                shortcut: "N/A"
+            },
+            3: {
+                desc: "Bước 3: Tạo một thư mục mới tại khoảng trống. Nhấp chuột phải vào một khoảng trống bất kỳ -> chọn New -> chọn tiếp Folder. Tiến hành đặt tên thư mục theo cú pháp cố định: 'ThucHanh_NguyenMaiChi' để đảm bảo quy chuẩn.",
+                action: "Nhấp chuột phải -> New -> Folder -> Nhập tên",
+                shortcut: "Ctrl + Shift + N"
+            },
+            4: {
+                desc: "Bước 4: Truy cập vào thư mục vừa tạo. Tiến hành nhấp đúp vào thư mục mang tên 'ThucHanh_NguyenMaiChi' để chuyển không gian làm việc vào bên trong thư mục này.",
+                action: "Double click chuột trái vào folder",
+                shortcut: "Enter khi chọn folder"
+            },
+            5: {
+                desc: "Bước 5: Tạo một tệp văn bản thô mới bằng cách nhấp chuột phải vào khoảng trống bất kỳ bên trong folder -> chọn New -> chọn Text Document. Tiến hành đặt tên tệp là 'GhiChu.txt' và nhấn Enter để xác nhận.",
+                action: "Nhấp chuột phải -> New -> Text Document -> Nhập tên",
+                shortcut: "N/A"
+            },
+            6: {
+                desc: "Bước 6: Đổi tên tệp văn bản. Nhấp chuột phải vào tệp 'GhiChu.txt' vừa tạo -> chọn biểu tượng đổi tên (Rename). Đổi tên tệp thành 'GhiChuQuanTrong.txt' và nhấn Enter.",
+                action: "Nhấp chuột phải -> chọn Rename -> Nhập tên mới",
+                shortcut: "F2"
+            },
+            7: {
+                desc: "Bước 7: Tạo một thư mục con bên trong folder chính. Nhấp chuột phải vào khoảng trống -> chọn New -> Folder. Đặt tên thư mục con này là 'TaiLieu' nhằm phân cấp lưu trữ.",
+                action: "Nhấp chuột phải -> New -> Folder -> Nhập tên",
+                shortcut: "Ctrl + Shift + N"
+            },
+            8: {
+                desc: "Bước 8: Sao chép tệp văn bản. Nhấp chuột phải vào tệp 'GhiChuQuanTrong.txt' -> chọn Copy (hoặc click chọn tệp và nhấn tổ hợp phím tắt Ctrl + C) để đưa tệp vào bộ nhớ tạm thời.",
+                action: "Nhấp chuột phải -> chọn Copy",
+                shortcut: "Ctrl + C"
+            },
+            9: {
+                desc: "Bước 9: Di chuyển và dán tệp tin. Nhấp đúp để vào thư mục con 'TaiLieu' vừa tạo ở bước 7, nhấp chuột phải vào khoảng trống bên trong thư mục -> chọn Paste (hoặc nhấn Ctrl + V). Bạn đã có một bản sao hoàn chỉnh của tệp nằm trong thư mục 'TaiLieu'.",
+                action: "Double click vào folder TaiLieu -> Paste",
+                shortcut: "Ctrl + V"
+            },
+            10: {
+                desc: "Bước 10: Thực hành di chuyển tệp bằng lệnh Cut. Quay lại thư mục gốc 'ThucHanh_NguyenMaiChi', tạo tệp mới mang tên 'DiChuyen.txt'. Nhấp chuột phải vào tệp này -> chọn Cut (hoặc nhấn Ctrl + X). Sau đó nhấp đúp vào thư mục 'TaiLieu', nhấp chuột phải vào khoảng trống -> chọn Paste. Tệp gốc ở vị trí cũ biến mất và chỉ còn ở thư mục con mới.",
+                action: "Nhấp chuột phải vào tệp -> chọn Cut -> Vào folder TaiLieu -> Paste",
+                shortcut: "Ctrl + X / Ctrl + V"
+            },
+            11: {
+                desc: "Bước 11: Thực hiện xóa vĩnh viễn tệp tin mà không cần đưa vào Thùng rác. Chọn tệp mang tên 'DiChuyen.txt' nằm trong thư mục con 'TaiLieu', nhấn giữ phím Shift và nhấn tiếp phím Delete. Một hộp thoại cảnh báo sẽ hiện lên hỏi bạn có chắc chắn muốn xóa vĩnh viễn không, hãy chọn Yes.",
+                action: "Chọn tệp tin -> Nhấn Shift + Delete -> Chọn Yes",
+                shortcut: "Shift + Delete"
+            },
+            12: {
+                desc: "Bước 12: Khôi phục tệp tin đã xóa thông thường. Quay lại màn hình Desktop của hệ điều hành, nhấp đúp để mở biểu tượng Recycle Bin (Thùng rác). Tìm kiếm tệp 'GhiChuQuanTrong.txt' đã xóa ở các bước thực nghiệm trước, nhấp chuột phải vào nó và chọn Restore. Tệp sẽ ngay lập tức quay trở lại vị trí ban đầu của nó.",
+                action: "Double click vào biểu tượng Recycle Bin -> Click phải chọn Restore",
+                shortcut: "N/A"
+            }
+        };
+
+        function selectStep(stepNum) {
+            document.querySelectorAll('.step-selector').forEach(btn => {
+                btn.classList.remove('bg-dreamBlue/20', 'border-dreamBlue', 'text-white');
+                btn.classList.add('border-white/5', 'bg-white/[0.01]', 'text-gray-500');
+            });
+            const selectedBtn = document.getElementById('step-btn-' + stepNum);
+            selectedBtn.classList.remove('border-white/5', 'bg-white/[0.01]', 'text-gray-500');
+            selectedBtn.classList.add('bg-dreamBlue/20', 'border-dreamBlue', 'text-white');
+
+            const data = week1Steps[stepNum];
+            document.getElementById('step-desc').innerText = data.desc;
+            document.getElementById('step-action').innerText = "Thao tác: " + data.action;
+            document.getElementById('step-shortcut').innerText = "Phím tắt: " + data.shortcut;
+        }
+
+        // 2. DỮ LIỆU BÀI 2: 10 BÀI BÁO KHOA HỌC CHI TIẾT
+        const academicReferences = [
+            {
+                stt: 1,
+                title: "Hồ Đình Bảo, Lê Thanh Hà, Lê Quốc Hội (2020). Vai trò của đầu tư trực tiếp nước ngoài đối với tăng trưởng kinh tế của Việt Nam. Tạp chí Kinh tế & Phát triển, số 279.",
+                type: "vietnam",
+                typeName: "Bài báo Việt Nam",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Trong bài báo này, các tác giả đã phân tích dữ liệu vĩ mô và chỉ ra rằng dòng vốn đầu tư nước ngoài FDI thực sự là cú hích lớn giúp kinh tế Việt Nam cất cánh trong dài hạn, tuy nhiên tốc độ này còn phụ thuộc lớn vào việc doanh nghiệp nội địa có chịu khó học hỏi công nghệ mới hay không."
+            },
+            {
+                stt: 2,
+                title: "Nguyễn Phúc Hiền & Lê Thùy Linh (2021). Tác động của đầu tư trực tiếp nước ngoài đến tăng trưởng kinh tế: Trường hợp nghiên cứu ở các nước ASEAN. Tạp chí Kinh tế & Phát triển, số 289.",
+                type: "vietnam",
+                typeName: "Bài báo Việt Nam",
+                rating: "⭐⭐⭐⭐",
+                content: "Bài nghiên cứu này đã so sánh bức tranh kinh tế của 10 quốc gia khu vực Đông Nam Á để rút ra cái nhìn toàn diện về tác động thực tế của dòng vốn đầu tư FDI lên mục tiêu phát triển kinh tế vĩ mô."
+            },
+            {
+                stt: 3,
+                title: "Phạm Hồng Chương & Hồ Đình Bảo. Những khác biệt trong tác động của đầu tư trực tiếp nước ngoài đến năng suất của các khu vực doanh nghiệp Việt Nam. Tạp chí Kinh tế & Phát triển.",
+                type: "vietnam",
+                typeName: "Bài báo Việt Nam",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Công trình này đi sâu vào phân tích dữ liệu doanh nghiệp tại Việt Nam để chỉ ra sự khác biệt lớn về năng suất giữa khối doanh nghiệp tư nhân và doanh nghiệp nhà nước khi tiếp nhận dòng vốn đầu tư nước ngoài."
+            },
+            {
+                stt: 4,
+                title: "Nguyễn Văn Chiến. Đầu tư trực tiếp nước ngoài, phát triển thị trường chứng khoán và tăng trưởng kinh tế – nghiên cứu trường hợp Đông Nam Á và Đông Á. Tạp chí Kinh tế & Phát triển.",
+                type: "vietnam",
+                typeName: "Bài báo Việt Nam",
+                rating: "⭐⭐⭐⭐",
+                content: "Một nghiên cứu thú vị chỉ ra mối quan hệ mật thiết giữa dòng vốn FDI chảy vào, sự lớn mạnh của thị trường chứng khoán trong nước và tốc độ tăng trưởng kinh tế khu vực Đông Á."
+            },
+            {
+                stt: 5,
+                title: "Tác động của đầu tư trực tiếp nước ngoài đến tăng trưởng kinh tế Việt Nam. Tạp chí Ngân hàng (2023).",
+                type: "vietnam",
+                typeName: "Bài nghiên cứu chuyên ngành",
+                rating: "⭐⭐⭐⭐",
+                content: "Bài phân tích của các chuyên gia ngành ngân hàng làm rõ cách thức dòng vốn đầu tư nước ngoài FDI tác động gián tiếp lên GDP của nước ta thông qua việc thúc đẩy hoạt động xuất nhập khẩu vĩ mô."
+            },
+            {
+                stt: 6,
+                title: "Nguyễn Xuân Hưng và cộng sự (2025). Các nhân tố tác động đến thu hút đầu tư trực tiếp nước ngoài vào các địa phương tại Việt Nam trong bối cảnh thực thi RCEP. Tạp chí Nghiên cứu Kinh tế.",
+                type: "vietnam",
+                typeName: "Bài báo Việt Nam",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Bài viết đưa ra những gợi ý chính sách thiết thực giúp các tỉnh thành của Việt Nam cải thiện môi trường đầu tư để đón đầu dòng vốn FDI chất lượng cao trong bối cảnh thực thi hiệp định RCEP."
+            },
+            {
+                stt: 7,
+                title: "Borensztein, E., De Gregorio, J., & Lee, J.W. (1998). How Does Foreign Direct Investment Affect Economic Growth? Journal of International Economics.",
+                type: "intl",
+                typeName: "Bài báo Quốc tế",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Đây là một nghiên cứu kinh điển ở quy mô quốc tế, chứng minh rằng FDI thực sự giúp chuyển giao công nghệ mới nhưng hiệu năng này chỉ phát huy tối đa khi quốc gia sở tại chuẩn bị được một đội ngũ nhân lực chất lượng cao."
+            },
+            {
+                stt: 8,
+                title: "Alfaro, L. et al. (2004). FDI and Economic Growth: The Role of Local Financial Markets. Journal of International Economics.",
+                type: "intl",
+                typeName: "Bài báo Quốc tế",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Bài viết chỉ ra vai trò xúc tác cực kỳ quan trọng của thị trường tài chính nội địa. Một hệ thống tài chính vững mạnh và thông suốt sẽ giúp doanh nghiệp trong nước hấp thụ công nghệ từ khối FDI tốt hơn rất nhiều."
+            },
+            {
+                stt: 9,
+                title: "Dunning, J.H. (1993). Multinational Enterprises and the Global Economy. Addison-Wesley.",
+                type: "intl",
+                typeName: "Sách chuyên khảo",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Cuốn sách kinh điển gối đầu giường của bất kỳ ai nghiên cứu kinh tế quốc tế, hệ thống hóa toàn bộ các lý thuyết nền tảng vĩ mô về hoạt động đầu tư xuyên quốc gia của các tập đoàn đa quốc gia."
+            },
+            {
+                stt: 10,
+                title: "World Bank. World Development Indicators – Foreign Direct Investment.",
+                type: "intl",
+                typeName: "Cơ sở dữ liệu",
+                rating: "⭐⭐⭐⭐⭐",
+                content: "Kho dữ liệu thống kê vĩ mô chính thức, cung cấp những con số cực kỳ chuẩn xác và uy tín về tình hình kinh tế, thương mại và dòng vốn FDI của tất cả các quốc gia trên thế giới qua nhiều thập kỷ."
+            }
+        ];
+
+        function renderSources(filterType) {
+            const tableBody = document.getElementById('source-table-body');
+            tableBody.innerHTML = '';
+            
+            const filtered = filterType === 'all' 
+                ? academicReferences 
+                : academicReferences.filter(item => item.type === filterType);
+
+            filtered.forEach(item => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-white/[0.015] transition-colors border-b border-white/5 align-top";
+                tr.innerHTML = `
+                    <td class="p-3 text-center font-bold text-gray-500">${item.stt}</td>
+                    <td class="p-3 font-semibold text-white leading-relaxed">${item.title}</td>
+                    <td class="p-3">
+                        <span class="px-2 py-1 rounded text-[9px] font-bold uppercase tracking-wider ${item.type === 'vietnam' ? 'bg-dreamBlue/10 text-dreamBlue border border-dreamBlue/20' : 'bg-dreamPink/10 text-dreamPink border border-dreamPink/20'}">
+                            ${item.typeName}
+                        </span>
+                    </td>
+                    <td class="p-3 text-center text-[10px]">${item.rating}</td>
+                    <td class="p-3 text-gray-400 leading-relaxed">${item.content}</td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        function filterSource(type) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-dreamBlue/20', 'text-white', 'border-dreamBlue/30');
+                btn.classList.add('text-gray-400', 'border-white/5', 'bg-white/[0.01]');
+            });
+            event.target.classList.remove('text-gray-400', 'border-white/5', 'bg-white/[0.01]');
+            event.target.classList.add('bg-dreamBlue/20', 'text-white', 'border-dreamBlue/30');
+            renderSources(type);
+        }
+
+        // 3. DỮ LIỆU BÀI 3: SO SÁNH PHIÊN BẢN PROMPT
+        const promptMatrix = {
+            1: {
+                A: '"Hãy tóm tắt bài nghiên cứu sau đây về lý thuyết lợi thế so sáng."',
+                B: '"Hãy tóm tắt bài nghiên cứu dưới đây bằng tiếng Việt. Yêu cầu chia rõ ràng thành các mục: Mục tiêu nghiên cứu, Phương pháp thực hiện, Kết quả chính và Đề xuất giải pháp. Giữ độ dài khoảng 300 từ."',
+                C: '"Bạn là một chuyên gia nghiên cứu hàng đầu về Giáo dục Kinh tế (Economic Education Researcher). Hãy đọc và phân tích bài nghiên cứu dưới đây để viết một bản tóm tắt học thuật (Executive Summary) cho sinh viên ngành Kinh tế Quốc tế. Hãy thực hiện suy nghĩ theo từng bước (Chain-of-Thought): Bước 1: Xác định câu hỏi nghiên cứu cốt lõi. Bước 2: Chỉ ra đối tượng và quy mô khảo sát. Bước 3: Tổng hợp số liệu định lượng quan trọng. Định dạng đầu ra sử dụng các gạch đầu dòng rõ ràng, tuyệt đối không dùng ngôn từ sáo rỗng."'
+            },
+            2: {
+                A: '"Giải thích cho tôi biết chi phí cơ hội là gì."',
+                B: '"Hãy giải thích khái niệm \'chi phí cơ hội\' cho một sinh viên năm thứ nhất mới học. Định nghĩa ngắn gọn, nêu cấu trúc gồm những phần nào và cho ít nhất 3 ví dụ minh họa kèm bài tập."',
+                C: '"Bạn là một giảng viên Kinh tế Quốc tế có 20 năm kinh nghiệm sư phạm tại đại học. Hãy giải thích khái niệm \'chi phí cơ hội\' (Opportunity Cost) cho học viên năm nhất. Sử dụng phương pháp so sánh ẩn dụ đơn giản để người nghe dễ tiếp thu. Hãy làm theo ví dụ cấu trúc sau (Few-shot): - Định nghĩa: [...] - Thành phần cấu tạo: [...]"'
+            },
+            3: {
+                A: '"Tạo cho tôi 5 câu hỏi ôn tập về lợi thế so sánh."',
+                B: '"Tạo bộ 5 câu hỏi trắc nghiệm ôn tập về lợi thế so sánh. Mỗi câu hỏi có 4 phương án lựa chọn, có đáp án đúng và lời giải thích đi kèm ở cuối."',
+                C: '"Bạn là một chuyên gia khảo thí và đo lường giáo dục tại UEB. Hãy biên soạn một đề kiểm tra gồm 5 câu hỏi trắc nghiệm nâng cao nhằm đánh giá tư duy phân tích lợi thế so sánh của sinh viên. Áp dụng các điều kiện nghiêm ngặt (Constraints): 1. Các phương án nhiễu phải có độ tương đồng cao về hình thể. 2. Độ khó tăng dần từ câu 1 đến câu 5. 3. Định dạng đầu ra nghiêm ngặt bằng khối mã JSON dưới cấu trúc: {\'id\': 1, \'question\': \'...\', \'options\': [\'A\', \'B\', \'C\', \'D\'], \'answer\': \'...\', \'explanation\': \'...\'}. Không viết thêm bất kỳ lời dẫn nào ngoài khối JSON."'
+            }
+        };
+
+        function selectPromptTask(taskId) {
+            document.querySelectorAll('.pt-btn').forEach(btn => {
+                btn.classList.remove('bg-dreamBlue/20', 'text-white', 'border-dreamBlue/30');
+                btn.classList.add('text-gray-400', 'border-white/5', 'bg-white/[0.01]');
+            });
+            const selectedBtn = document.getElementById('btn-pt-' + taskId);
+            selectedBtn.classList.remove('text-gray-400', 'border-white/5', 'bg-white/[0.01]');
+            selectedBtn.classList.add('bg-dreamBlue/20', 'text-white', 'border-dreamBlue/30');
+
+            const data = promptMatrix[taskId];
+            document.getElementById('prompt-vA').innerText = data.A;
+            document.getElementById('prompt-vB').innerText = data.B;
+            document.getElementById('prompt-vC').innerText = data.C;
+        }
+
+        // 4. CHUYỂN ĐỔI TAB BÀI TẬP TUẦN 1 - 6
+        function switchTab(weekId) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+
+            const activePanel = document.getElementById(weekId);
+            if (activePanel) {
+                activePanel.classList.remove('hidden');
+            }
+
+            document.querySelectorAll('.tab-btn').forEach(button => {
+                button.classList.remove('bg-dreamPurple/20', 'text-white');
+                button.classList.add('text-gray-400', 'hover:text-white');
+            });
+
+            const activeButton = document.getElementById('btn-' + weekId);
+            if (activeButton) {
+                activeButton.classList.remove('text-gray-400', 'hover:text-white');
+                activeButton.classList.add('bg-dreamPurple/20', 'text-white');
+            }
+        }
+
+        // KHỞI TẠO HOẠT ĐỘNG
+        window.addEventListener('DOMContentLoaded', () => {
+            selectStep(1);
+            renderSources('all');
+            selectPromptTask(1);
+        });
+    </script>
+</body>
+</html>
